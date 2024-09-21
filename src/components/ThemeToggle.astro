@@ -1,0 +1,29 @@
+---
+import SunIcon from '../icons/Sun.astro';
+import MoonIcon from '../icons/Moon.astro';
+---
+
+<script>
+  const themeController = document.getElementById('theme-controller');
+  const inputElement = themeController as HTMLInputElement;
+
+  inputElement.checked = localStorage.getItem('theme') === 'light';
+
+  themeController?.addEventListener('change', () => {
+    if (inputElement.checked) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+
+<div class="tooltip tooltip-bottom" data-tip="Toggle dark mode">
+  <label class=" swap swap-rotate tooltip-bottom mt-3">
+    <input id="theme-controller" value="light" type="checkbox" class="theme-controller" aria-label="Toggle dark mode" />
+    <MoonIcon />
+    <SunIcon />
+  </label>
+</div>
