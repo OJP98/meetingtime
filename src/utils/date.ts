@@ -1,5 +1,8 @@
 export const daysInMonth = (month: number, year: number) =>
-  new Date(year, month, 0).getDate();
+  new Date(year, month + 1, 0).getDate();
+
+export const daysInMonthArray = (month: number, year: number) =>
+  Array.from({ length: daysInMonth(month, year) }, (_, i) => i + 1);
 
 export const today = new Date();
 
