@@ -11,7 +11,7 @@ const days = daysInMonthArray(todayMonth, todayYear);
 const years = [todayYear - 1, todayYear, todayYear + 1];
 ---
 
-<div class="flex gap-1 rounded-xl bg-primary-content p-2 xs:gap-2">
+<div class="flex items-center gap-1 rounded-xl bg-primary-content p-2 sm:gap-2">
   <Select id="day-picker">
     {
       days.map((day) => {
@@ -51,6 +51,9 @@ const years = [todayYear - 1, todayYear, todayYear + 1];
       })
     }
   </Select>
+  <div class="divider divider-primary divider-horizontal"></div>
+  <button class="btn btn-accent btn-sm">Calendar</button>
+  <button class="btn btn-primary btn-sm">Today</button>
 </div>
 
 <script>
