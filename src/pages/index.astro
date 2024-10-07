@@ -1,21 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import DatePicker from "../components/DatePicker.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="MeetingTime">
-  <main class="mt-36 h-[900px]">
-    <Header />
-    <section aria-label="Recommended time for an international meeting">
-      <div class="mx-auto max-w-screen-xl px-4">
-        <div class="rounded-xl bg-primary-content px-2 py-2 text-center">
-          <p class="text-base-content">
-            What's the best time for a <span class="font-bold text-accent"
-              >meeting</span
-            >? Let's find out! 🚀
-          </p>
-        </div>
-      </div>
-    </section>
+  <main>
+    <DatePicker />
   </main>
 </Layout>

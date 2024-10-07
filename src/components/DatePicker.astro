@@ -1,0 +1,56 @@
+---
+import {
+  daysInMonth,
+  todayDay,
+  todayMonth,
+  todayYear,
+  months,
+} from "../utils/date";
+import Select from "./Select.astro";
+const daysInCurrentMonth = daysInMonth(todayMonth, todayYear);
+const days = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
+const years = [todayYear, todayYear + 1];
+---
+
+<p class="font-bold text-primary">Pick a date</p>
+<div class="flex gap-4 rounded-xl bg-primary-content p-2">
+  <Select id="day-picker">
+    {
+      days.map((day) => {
+        if (day === todayDay)
+          return (
+            <option value={day} selected>
+              {day}
+            </option>
+          );
+        return <option value={day}>{day}</option>;
+      })
+    }
+  </Select>
+  <Select id="month-picker">
+    {
+      months.map((month, i) => {
+        if (i === todayMonth)
+          return (
+            <option value={i} selected>
+              {month}
+            </option>
+          );
+        return <option value={i}>{month}</option>;
+      })
+    }
+  </Select>
+  <Select id="year-picker">
+    {
+      years.map((year) => {
+        if (year === todayYear)
+          return (
+            <option value={year} selected>
+              {year}
+            </option>
+          );
+        return <option value={year}>{year}</option>;
+      })
+    }
+  </Select>
+</div>

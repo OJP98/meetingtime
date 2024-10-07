@@ -1,4 +1,5 @@
 ---
+import Header from "../components/Header.astro";
 interface Props {
   title: string;
 }
@@ -24,52 +25,58 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
+  <Header />
   <body>
-    <slot />
+    <div class="mt-28 max-w-6xl px-4 lg:px-10">
+      <slot />
+    </div>
   </body>
+
+  <style is:global>
+    :root {
+      --accent: 136, 58, 234;
+      --accent-light: 224, 204, 250;
+      --accent-dark: 49, 10, 101;
+      --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+      );
+      --sb-track-color: #1d232a;
+      --sb-thumb-color: #a6adbb;
+      --sb-size: 6px;
+    }
+    html {
+      font-family: system-ui, sans-serif;
+      background: #13151a;
+      scrollbar-width: thin;
+      scrollbar-color: var(--sb-thumb-color) transparent;
+    }
+    ::-webkit-scrollbar {
+      width: var(--sb-size);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--sb-thumb-color);
+    }
+
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
+  </style>
+
+
 </html>
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-    --sb-track-color: #1d232a;
-    --sb-thumb-color: #a6adbb;
-    --sb-size: 6px;
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    scrollbar-width: thin;
-    scrollbar-color: var(--sb-thumb-color) transparent;
-  }
-  ::-webkit-scrollbar {
-    width: var(--sb-size);
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--sb-thumb-color);
-  }
-
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-</style>

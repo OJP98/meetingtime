@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string;
+  label?: string;
+  twClass?: string[];
+}
+
+const { id, label, twClass } = Astro.props;
+---
+
+<label>
+  {
+    label && (
+      <div class="label">
+        <span class="label-text">{label}</span>
+      </div>
+    )
+  }
+  <select id={id} class="select select-bordered" class:list={twClass}>
+    <slot />
+  </select>
+</label>
