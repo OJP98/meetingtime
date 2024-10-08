@@ -1,0 +1,60 @@
+---
+const countries = [
+  "Guatemala",
+  "El Salvador",
+  "United States",
+  "San Salvador",
+  "Buenos Aires",
+];
+---
+
+<div id="search" class="dropdown">
+  <input
+    id="search-input"
+    tabindex="0"
+    type="text"
+    placeholder="Search your city..."
+    class="input input-bordered"
+    onkeyup="filterItems()"
+    onclick="filterItems()"
+  />
+  <div class="dropdown-content w-full rounded-box bg-base-200 shadow">
+    <ul class="menu menu-dropdown">
+      {
+        countries.map((country, index) => (
+          <li
+            tabindex={index + 1}
+            class="search-option"
+            onclick="setItemValue(this)"
+          >
+            <button class="flex justify-between">
+              <p>{country}</p>
+              <p>🏁</p>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script is:inline>
+  const input = document.getElementById("search-input");
+
+  function filterItems() {
+    const filter = input.value.toUpperCase();
+    const options = document.querySelectorAll(".search-option");
+    options.forEach((option) => {
+      if (option.textContent.toUpperCase().indexOf(filter) > -1) {
+        option.style.display = "";
+      } else {
+        option.style.display = "none";
+      }
+    });
+  }
+
+  function setItemValue(element) {
+    input.value = element.textContent.trim();
+    document.activeElement.blur();
+  }
+</script>
