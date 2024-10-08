@@ -3,9 +3,10 @@ interface Props {
   id: string;
   label?: string;
   twClass?: string[];
+  ariaLabel: string;
 }
 
-const { id, label, twClass } = Astro.props;
+const { id, label, twClass, ariaLabel } = Astro.props;
 ---
 
 <label>
@@ -16,7 +17,12 @@ const { id, label, twClass } = Astro.props;
       </div>
     )
   }
-  <select id={id} class="select select-bordered" class:list={twClass}>
+  <select
+    aria-label={ariaLabel}
+    id={id}
+    class="select select-bordered"
+    class:list={twClass}
+  >
     <slot />
   </select>
 </label>

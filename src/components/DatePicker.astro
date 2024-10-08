@@ -11,49 +11,55 @@ const days = daysInMonthArray(todayMonth, todayYear);
 const years = [todayYear - 1, todayYear, todayYear + 1];
 ---
 
-<div class="flex items-center gap-1 rounded-xl bg-primary-content p-2 sm:gap-2">
-  <Select id="day-picker">
-    {
-      days.map((day) => {
-        if (day === todayDay)
-          return (
-            <option value={day} selected>
-              {day}
-            </option>
-          );
-        return <option value={day}>{day}</option>;
-      })
-    }
-  </Select>
-  <Select id="month-picker">
-    {
-      months.map((month, i) => {
-        if (i === todayMonth)
-          return (
-            <option value={i} selected>
-              {month}
-            </option>
-          );
-        return <option value={i}>{month}</option>;
-      })
-    }
-  </Select>
-  <Select id="year-picker">
-    {
-      years.map((year) => {
-        if (year === todayYear)
-          return (
-            <option value={year} selected>
-              {year}
-            </option>
-          );
-        return <option value={year}>{year}</option>;
-      })
-    }
-  </Select>
-  <div class="divider divider-primary divider-horizontal"></div>
-  <button class="btn btn-accent btn-sm">Calendar</button>
-  <button class="btn btn-primary btn-sm">Today</button>
+<div
+  class="flex w-full flex-col items-center gap-1 rounded-xl bg-primary-content p-2 sm:w-fit sm:flex-row sm:gap-0"
+>
+  <div class="flex flex-nowrap gap-1 sm:gap-2">
+    <Select id="day-picker" ariaLabel="Day select dropdown">
+      {
+        days.map((day) => {
+          if (day === todayDay)
+            return (
+              <option value={day} selected>
+                {day}
+              </option>
+            );
+          return <option value={day}>{day}</option>;
+        })
+      }
+    </Select>
+    <Select id="month-picker" ariaLabel="Month select dropdown">
+      {
+        months.map((month, i) => {
+          if (i === todayMonth)
+            return (
+              <option value={i} selected>
+                {month}
+              </option>
+            );
+          return <option value={i}>{month}</option>;
+        })
+      }
+    </Select>
+    <Select id="year-picker" ariaLabel="Year select dropdown">
+      {
+        years.map((year) => {
+          if (year === todayYear)
+            return (
+              <option value={year} selected>
+                {year}
+              </option>
+            );
+          return <option value={year}>{year}</option>;
+        })
+      }
+    </Select>
+  </div>
+  <div class="divider my-0 sm:divider-horizontal"></div>
+  <div class="flex gap-1 self-center sm:gap-2">
+    <button class="btn btn-outline btn-accent">🗓️</button>
+    <button id="today-button" class="btn btn-outline btn-primary">Today</button>
+  </div>
 </div>
 
 <script>
@@ -61,6 +67,16 @@ const years = [todayYear - 1, todayYear, todayYear + 1];
   const yearPicker = document.getElementById("year-picker")!;
   const monthPicker = document.getElementById("month-picker")!;
   const dayPicker = document.getElementById("day-picker")!;
+
+  function setToday() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    (dayPicker as HTMLSelectElement).value = day.toString();
+    (monthPicker as HTMLSelectElement).value = month.toString();
+    (yearPicker as HTMLSelectElement).value = year.toString();
+  }
 
   function changeDayPicker() {
     const selectedDay = (dayPicker as HTMLSelectElement).value;
@@ -79,4 +95,6 @@ const years = [todayYear - 1, todayYear, todayYear + 1];
   [yearPicker, monthPicker].forEach((picker) =>
     picker.addEventListener("change", () => changeDayPicker()),
   );
+
+  document.getElementById("today-button")!.addEventListener("click", setToday);
 </script>

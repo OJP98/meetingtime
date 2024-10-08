@@ -1,4 +1,6 @@
 ---
+import Search from "../icons/Search.astro";
+
 const countries = [
   "Guatemala",
   "El Salvador",
@@ -8,16 +10,19 @@ const countries = [
 ];
 ---
 
-<div id="search" class="dropdown">
-  <input
-    id="search-input"
-    tabindex="0"
-    type="text"
-    placeholder="Search your city..."
-    class="input input-bordered"
-    onkeyup="filterItems()"
-    onclick="filterItems()"
-  />
+<div id="search" class="dropdown w-full sm:w-fit">
+  <label class="input input-bordered flex w-full items-center">
+    <input
+      id="search-input"
+      tabindex="0"
+      type="text"
+      placeholder="Search your city..."
+      class="grow"
+      onkeyup="filterItems()"
+      onclick="filterItems()"
+    />
+    <Search />
+  </label>
   <div class="dropdown-content w-full rounded-box bg-base-200 shadow">
     <ul class="menu menu-dropdown">
       {
@@ -34,23 +39,42 @@ const countries = [
           </li>
         ))
       }
+      <li class="disabled" style="display: none;">
+        <button>No results found</button>
+      </li>
     </ul>
   </div>
+</div>
+
+<div class="divider my-0 sm:hidden"></div>
+
+<div class="flex w-full justify-center gap-1 sm:mt-2 sm:justify-start sm:gap-2">
+  <button class="btn btn-outline btn-primary btn-sm">Search</button>
+  <button class="btn btn-outline btn-primary btn-sm">Zone</button>
 </div>
 
 <script is:inline>
   const input = document.getElementById("search-input");
 
+  function displayDisabled(isDisplayed) {
+    document.querySelector(".disabled").style.display = isDisplayed
+      ? ""
+      : "none";
+  }
+
   function filterItems() {
     const filter = input.value.toUpperCase();
     const options = document.querySelectorAll(".search-option");
+    let hits = 0;
     options.forEach((option) => {
       if (option.textContent.toUpperCase().indexOf(filter) > -1) {
         option.style.display = "";
+        hits++;
       } else {
         option.style.display = "none";
       }
     });
+    displayDisabled(hits === 0);
   }
 
   function setItemValue(element) {
