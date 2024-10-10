@@ -1,0 +1,7 @@
+.tag {
+  @apply btn btn-outline btn-sm w-fit;
+
+  span {
+    @apply text-xs;
+  }
+}

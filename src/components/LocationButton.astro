@@ -1,0 +1,28 @@
+---
+interface Props {
+  location: string;
+}
+
+const { location: location } = Astro.props;
+---
+
+<location-button data-location={location} class="flex justify-between">
+  <p>{location}</p>
+  <p>🏁</p>
+</location-button>
+
+<script>
+  import Tag from "../classes/Tag.js";
+  const locationsContainer = document.getElementById("locations-container")!;
+  class LocationButton extends HTMLElement {
+    connectedCallback() {
+      const location = this.dataset.location!;
+      this.addEventListener("click", () => {
+        (document.activeElement as HTMLElement).blur();
+        const tag = new Tag(location, "value");
+        locationsContainer.appendChild(tag.render());
+      });
+    }
+  }
+  customElements.define("location-button", LocationButton);
+</script>

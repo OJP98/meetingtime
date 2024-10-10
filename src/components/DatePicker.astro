@@ -11,10 +11,8 @@ const days = daysInMonthArray(todayMonth, todayYear);
 const years = [todayYear - 1, todayYear, todayYear + 1];
 ---
 
-<div
-  class="flex w-full flex-col items-center gap-1 rounded-xl bg-primary-content p-2 sm:w-fit sm:flex-row sm:gap-0"
->
-  <div class="flex flex-nowrap gap-1 sm:gap-2">
+<div class="flex w-full flex-col gap-1 rounded-xl md:gap-0 lg:flex-row">
+  <div class="flex flex-nowrap gap-1 md:gap-2">
     <Select id="day-picker" ariaLabel="Day select dropdown">
       {
         days.map((day) => {
@@ -55,10 +53,12 @@ const years = [todayYear - 1, todayYear, todayYear + 1];
       }
     </Select>
   </div>
-  <div class="divider my-0 sm:divider-horizontal"></div>
-  <div class="flex gap-1 self-center sm:gap-2">
-    <button class="btn btn-outline btn-accent">🗓️</button>
-    <button id="today-button" class="btn btn-outline btn-primary">Today</button>
+  <div class="divider my-0 lg:divider-horizontal"></div>
+  <div class="flex gap-1 md:gap-2 lg:self-center">
+    <button class="btn btn-outline btn-accent btn-sm">🗓️</button>
+    <button id="today-button" class="btn btn-outline btn-primary btn-sm"
+      >Today</button
+    >
   </div>
 </div>
 

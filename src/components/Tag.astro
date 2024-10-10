@@ -1,0 +1,19 @@
+---
+import Cancel from "../icons/Cancel.astro";
+
+interface Props {
+  id?: string;
+  label: string;
+  value?: string;
+}
+const { id = 0, label, value = "test" } = Astro.props;
+---
+
+<astro-tag data-id={id} data-label={label} data-value={value}>
+  <button id={id + "-tag"} class="tag"
+    >{label}
+    <Cancel />
+  </button>
+</astro-tag>
+
+<script src="../classes/Tag.js"></script>

@@ -1,15 +1,51 @@
 ---
-import CountrySelect from "../components/CountrySelect.astro";
+import LocationSelect from "../components/LocationSelect.astro";
 import DatePicker from "../components/DatePicker.astro";
+import LocationsContainer from "../components/LocationsContainer.astro";
+import Tag from "../components/Tag.astro";
 import Layout from "../layouts/Layout.astro";
+import "../main.css";
 ---
 
 <Layout title="MeetingTime">
   <main>
-    <p class="font-bold text-primary">Pick a date</p>
-    <DatePicker />
-    <br />
-    <p class="font-bold text-primary">Pick a country</p>
-    <CountrySelect />
+    <div class="grid-container">
+      <div class="md:col-span-5">
+        <p>What's the best time for a meeting? Let's find out! 🚀</p>
+      </div>
+      <div class="flex-col md:col-span-3 md:row-span-2 md:w-4/5">
+        <p class="font-bold text-primary">Pick a date</p>
+        <DatePicker />
+      </div>
+      <div class="flex-col md:col-span-3 md:row-span-2 md:row-start-4 md:w-4/5">
+        <p class="font-bold text-primary">Pick a location</p>
+        <LocationSelect />
+      </div>
+      <div class="flex-col md:col-span-2 md:row-span-3">
+        <p class="font-bold text-primary">Selected Locations:</p>
+        <LocationsContainer />
+      </div>
+    </div>
   </main>
 </Layout>
+
+<style>
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 1rem;
+  }
+
+  .grid-container > div {
+    /* border: 1px solid #ccc; */
+    display: flex;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

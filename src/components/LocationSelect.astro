@@ -1,7 +1,8 @@
 ---
 import Search from "../icons/Search.astro";
+import LocationButton from "./LocationButton.astro";
 
-const countries = [
+const locations = [
   "Guatemala",
   "El Salvador",
   "United States",
@@ -10,8 +11,8 @@ const countries = [
 ];
 ---
 
-<div id="search" class="dropdown w-full sm:w-fit">
-  <label class="input input-bordered flex w-full items-center">
+<div id="search" class="dropdown">
+  <label class="input input-bordered flex items-center lg:w-[485px]">
     <input
       id="search-input"
       tabindex="0"
@@ -19,23 +20,15 @@ const countries = [
       placeholder="Search your city..."
       class="grow"
       onkeyup="filterItems()"
-      onclick="filterItems()"
     />
     <Search />
   </label>
-  <div class="dropdown-content w-full rounded-box bg-base-200 shadow">
+  <div class="dropdown-content rounded-box bg-base-200 shadow lg:w-[485px]">
     <ul class="menu menu-dropdown">
       {
-        countries.map((country, index) => (
-          <li
-            tabindex={index + 1}
-            class="search-option"
-            onclick="setItemValue(this)"
-          >
-            <button class="flex justify-between">
-              <p>{country}</p>
-              <p>🏁</p>
-            </button>
+        locations.map((location, index) => (
+          <li tabindex={index + 1} class="search-option">
+            <LocationButton location={location} />
           </li>
         ))
       }
@@ -75,10 +68,5 @@ const countries = [
       }
     });
     displayDisabled(hits === 0);
-  }
-
-  function setItemValue(element) {
-    input.value = element.textContent.trim();
-    document.activeElement.blur();
   }
 </script>
